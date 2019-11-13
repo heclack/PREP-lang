@@ -1,37 +1,35 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-
-my @hears;
-print "filename?";
+                #ask for project name=>filename
+print "project name?";
 my $file= <STDIN>;
 chomp ($file);
+                #prompt for line of code
 print "\$ay\$  ";
 my $says=<STDIN>;
 chomp($says);
 open(FH, '>' .$file) or die "Cannot open < $file: $!";
 chomp $says;
-if($says=~/\(/){
-    $says=~tr/[\)\' ']/\\,/;
-    $says=~tr/[\;\(]/\ /;
-    $says =~s/^\s+|\s+$//g;
+                #seperate valid inputs into two groups
+                #then parse according to get correct output
+for($says){
+if(/\(/){
+    tr/[\)\' ']/\\,/;
+    tr/[\;\(]/\ /;
+    s/^\s+|\s+$//g;
 }
-if($says=~/\+/){
-    $says=~tr/[\+]/\\ /;
-    $says=~tr/[\;\(]/\ /;
-    $says =~s/^\s+|\s+$//g;
-};
+if(/\+/){
+    tr/[\=\' ']/\\,/;
+    tr/[\+\;]/\\ /; 
+}   
+s/^\s+|\s+$//g;
+}
+                #write to file
 print FH $says;
 print $says;
-
-
-
- @hears = split(',', $says);
-
-my $iterator;
-my @variable;
-my @event; 
-    # print $iterator;
-    # print @variable;
+my @hears;
+@hears = split(',', $says);
+                #cleanup
 close(FH);
     
