@@ -1,32 +1,35 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
+!Build/
+.last_cover_stats
+/META.yml
+/META.json
+/MYMETA.*
 *.o
-*.obj
+*.pm.tdy
+*.bs
 
-# Precompiled Headers
-*.gch
-*.pch
+# Devel::Cover
+cover_db/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Devel::NYTProf
+nytprof.out
 
-# Fortran module files
-*.mod
-*.smod
+# Dizt::Zilla
+/.build/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Module::Build
+_build/
+Build
+Build.bat
 
-# Executables
-*.exe
-*.out
-*.app
+# Module::Install
+inc/
+
+# ExtUtils::MakeMaker
+/blib/
+/_eumm/
+/*.gz
+/Makefile
+/Makefile.old
+/MANIFEST.bak
+/pm_to_blib
+/*.zip
