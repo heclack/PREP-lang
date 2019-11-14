@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 
+
 const static int SIZE = 4096;
 
 using std::ios_base;
@@ -15,10 +16,13 @@ int main(int argc, char** argv) {
    char buf[SIZE];
 
    do {
-      in.read(&buf[0], SIZE);      
-        for (int i = 0; i<SIZE; i++){
-           buf[i]=static_cast<int>(buf[i]);
-        }
+
+      in.read(&buf[0], SIZE);   
+
+        for (int i = 0; i<SIZE; i++){           
+            buf[i]=static_cast<char>(buf[i]);
+}
+
       out.write(&buf[0], in.gcount()); 
    } while (in.gcount() > 0);          
    in.close();
