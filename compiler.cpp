@@ -18,12 +18,7 @@ int main(int argc, char** argv) {
    do {
 
       in.read(&buf[0], SIZE);   
-
-        for (int i = 0; i<SIZE; i++){           
-            buf[i]=static_cast<char>(buf[i]);
-}
-
-      out.write(&buf[0], in.gcount()); 
+     out.write(&buf[0], in.gcount()); 
    } while (in.gcount() > 0);          
    in.close();
    out.close();
