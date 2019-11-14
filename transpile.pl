@@ -9,26 +9,34 @@ chomp ($file);
 print "\$ay\$  ";
 my $says=<STDIN>;
 chomp($says);
-open(FH, '>' .$file) or die "Cannot open < $file: $!";
-chomp $says;
                 #seperate valid inputs into two groups
                 #then parse according to get correct output
 for($says){
-if(/\(/){
-    tr/[\)\' ']/\\,/;
-    tr/[\;\(]/\ /;
-}
-if(/\+/){
+if(/[\(\)]/){
+        tr/[\)\' ']/\\,/;
+        tr/[\;\(]/\ /;
+    }
+elsif(/\+/){
     tr/[\=\' ']/\\,/;
     tr/[\+\;]/\\ /; 
-}   
-s/^\s+|\s+$//g;
-}
-                #write to file
-print FH $says;
-print $says;
+        }else{ print STDERR "Syntax error";
+        exit(1);    
+    }
+    s/^\s+|\s+$//g;
+}             
 my @hears;
-@hears = split(',', $says);
-                #cleanup
-close(FH);
+@hears = split(',', $says);           
+                 #write to file
+for($says){
+    open(FH, '>' .$file) or die "Cannot open < $file: $!";
+    (tr/[\,]/0/);
+    (s/^\s+|\s+$//g);
+    print FH $says;
+    close(FH);
+    
+};
+
+
+print $says;
+
     
