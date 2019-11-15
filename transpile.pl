@@ -2,17 +2,14 @@
 use strict;
 use warnings;
 
-my $passCheck;
-                #ask for project name=>filename
 print "project name?";
 my $file= <STDIN>;
-chomp ($file);
+chomp ($file);  #will be used for output file name
                 #prompt for line of code
 print "\$ay\$  ";
 my $says=<STDIN>;
 chomp($says);
-                #seperate valid inputs into two groups
-                #then parse according to get correct output
+
 for($says){
                 #General Syntax errors
     if(/\+/ && /!\=/){
@@ -31,6 +28,8 @@ for($says){
         print STDERR "Unexpected termination of loop. Missing opening \(";
     };
 }
+#seperate valid inputs into two groups
+#then parse according to get correct output
 for ($says){
 if(/[\(\)]/){               ###if () =>
     s/\;/\}\;/;                     ##replace: ; => "};"    
