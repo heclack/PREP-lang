@@ -16,48 +16,55 @@ chomp($says);
 for($says){
                 #General Syntax errors
     if(/\+/ && /!\=/){
-        print STDERR "variable has no \= defination";
+        print STDERR "Variable has no \= definition";
     };
     if(/\=/ && /!\+/){
-        print STDERR "variable must be declared with \+ before definition";
+        print STDERR "Variable must be declared with \+ before definition";
     };
-    if(/\;$/){
-        print STDERR "missing \; at end of line";
+    if(/\$;/){
+        print STDERR "Missing \; at end of line";
     };
     if(/\(/ && /!\)/){
-        print STDERR "parenthesis is not closed. \( has no match";
+        print STDERR "Loop is not closed. \) has no match";
     };
-    if(/\)/ && /\(/){
-        print STDERR ""
+    if(/\)/ && /!\(/){
+        print STDERR "Unexpected termination of loop. Missing opening \(";
+    };
+}
+for ($says){
+if(/[\(\)]/){               ###if () =>
+    s/\;/\}\;/;                     ##replace: ; => "};"    
+    if(/d/){                        #(if digit)
+        s/[\(]/for\(int i\=0\;i\</; ## ( => "for (int i = 0; i<"
+        s/[\)]/\;i\+\+\)\{/;        ## ) => ";i++)"
+    }else{                      #else
+        s/[\(]/while\(/;            ## ( => "while("
+        s/\)/\)\{/;                 ## ) => "){"
+        }
     }
-
-return($passCheck)
-}while($passCheck){
-if(/[\(\)]/){
-        tr/[\)\' ']/\\,/;
-        tr/[\;\(]/\ /;
-    }
-elsif(/\+/){
-    tr/[\=\' ']/\\,/;
-    tr/[\+\;]/\\ /; 
-        }else{ print STDERR "Syntax error, error during parsing";
+elsif(/\+/){                        #(if + =>
+    if(/\=d/){                      ##  if = digit)  
+        s/\+/[int]/;                ## + => "int"
+    }else{                      #else
+        s/\+/[string]/;             ## + =>"string" 
+        };  
+}else{ print STDERR "Syntax error, error during parsing";
         exit(1);    
     }
-    s/^\s+|\s+$//g;
-}             
-my @hears;
-@hears = split(',', $says);           
-                 #write to file
+s/^\s+|\s+$//g;                     ##REMOVE white space
+
+}                  
+
+
+
+
+
+                   #write to file
 for($says){
     open(FH, '>' .$file) or die "Cannot open < $file: $!";
-    tr/\,/ /;
     print FH $says;
     print $says;
     close(FH);
-    
 };
-
-
-print $says;
 
     
