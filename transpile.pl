@@ -27,7 +27,8 @@ for($says){
     if(/\)/ && /!\(/){
         print STDERR "Unexpected termination of loop. Missing opening \(";
     };
-}
+};
+
 #seperate valid inputs into two groups
 #then parse according to get correct output
 for ($says){
@@ -47,12 +48,9 @@ elsif(/\+/){                        #(if + =>
     }else{                      #else
         s/\+/[string]/;             ## + =>"string" 
         };  
-}else{ print STDERR "Syntax error, error during parsing";
-        exit(1);    
-    }
-s/^\s+|\s+$//g;                     ##REMOVE white space
 
-}                  
+s/^\s+|\s+$//g;                     ##REMOVE white space
+};                 
 
 
 
@@ -64,6 +62,5 @@ for($says){
     print FH $says;
     print $says;
     close(FH);
-};
 
-    
+}
