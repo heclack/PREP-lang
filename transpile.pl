@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-
+my $header= "\#include\<iostream\>\n
+using namespace std\;\n
+int main\(\)\{\n";
 print "project name?";
 my $file= <STDIN>;
-chomp ($file);  #will be used for output file name
-                #prompt for line of code
+my $newname = "new.cpp";
 print "\$ay\$  ";
 my $says=<STDIN>;
 chomp($says);
@@ -27,7 +28,8 @@ for($says){
     if(/\)/ && /!\(/){
         print STDERR "Unexpected termination of loop. Missing opening \(";
     };
-}
+};
+
 #seperate valid inputs into two groups
 #then parse according to get correct output
 for ($says){
@@ -47,23 +49,16 @@ elsif(/\+/){                        #(if + =>
     }else{                      #else
         s/\+/[string]/;             ## + =>"string" 
         };  
-}else{ print STDERR "Syntax error, error during parsing";
-        exit(1);    
-    }
+
 s/^\s+|\s+$//g;                     ##REMOVE white space
-
-}                  
-
-
-
-
-
+};                 
                    #write to file
-for($says){
-    open(FH, '>' .$file) or die "Cannot open < $file: $!";
-    print FH $says;
-    print $says;
-    close(FH);
-};
 
-    
+open(FH, '>' .$file) or die "Cannot open < $file: $!";
+    print FH $says;
+    print FH "\}";
+    close(FH);
+    rename $file, $newname;      ## creates a c++ file
+    my $cmd = (`g++ $newname`);  ##compile using g++ => a.out
+    system($cmd);
+}
