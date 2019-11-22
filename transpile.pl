@@ -6,6 +6,7 @@ using namespace std\;\n
 int main\(\)\{\n";
 print "project name?";
 my $file= <STDIN>;
+chomp($file);
 my $newname = "new.cpp";
 print "\$ay\$  ";
 my $says=<STDIN>;
